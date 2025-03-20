@@ -1,8 +1,22 @@
 
 import { useState } from "react";
 import logo from "../assets/whitepace-logo.png";
+import gsap from "gsap"
+import { useGSAP } from '@gsap/react';
 
 export default function Navbar() {
+
+        gsap.registerPlugin(useGSAP);
+    
+        useGSAP(() => {
+            gsap.from('.nav-item', {
+                scale:2,
+                opacity: 0,
+                y:-50,
+                duration: 1,
+                stagger: 0.4
+            })
+        } )
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -11,34 +25,34 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="bg-mainbg flex flex-row items-center justify-center w-full text-white p-3 border border-t-0 border-r-0 border-l-0 border-[#1f5da383]  relative ">
-            <div className="container flex items-center p-2 justify-between w-full " >
+        <nav className="bg-mainbg fixed flex flex-row items-center justify-center w-full text-white p-2 border border-t-0 border-r-0 border-l-0 border-[#1f5da383] top-0 z-10 ">
+            <div className="container flex items-center justify-between w-full " >
                 <img src={logo} alt="Logo"/>
                 <div className="flex flex-row flex-wrap justify-center items-center gap-8">
                     <div className="lg:flex md:hidden sm:hidden small:hidden flex-row gap-5 p-2">
-                        <div className="group cursor-pointer flex flex-row gap-2 items-center relative ">
+                        <div className="group cursor-pointer flex flex-row gap-2 items-center relative nav-item ">
                             <span>Product</span>
                             <i className="fa-solid fa-chevron-down"></i>
                             <div className="w-[20vw] bg-red-600 h-[10vh] absolute top-6 hidden group-hover:block" ></div>
                         </div>
 
-                        <div className="cursor-pointer flex flex-row gap-2 items-center ">
+                        <div className="cursor-pointer flex flex-row gap-2 items-center nav-item ">
                             <span>Solution</span>
                             <i className="fa-solid fa-chevron-down"></i>
                         </div>
 
-                        <div className="cursor-pointer flex flex-row gap-2 items-center ">
+                        <div className="cursor-pointer flex flex-row gap-2 items-center nav-item ">
                             <span>Resources</span>
                             <i className="fa-solid fa-chevron-down"></i>
                         </div>
 
-                        <div className="cursor-pointer flex flex-row gap-2 items-center ">
+                        <div className="cursor-pointer flex flex-row gap-2 items-center nav-item ">
                             <span>Pricing</span>
                             <i className="fa-solid fa-chevron-down"></i>
                         </div>
                     </div>
 
-                    <div className="md:flex justify-center items-stretch gap-5 small:hidden sm:hidden">
+                    <div className="md:flex justify-center items-stretch gap-5 small:hidden sm:hidden nav-item">
                         <button className="bg-yellow-300 px-5 py-3 rounded-md text-black hover:scale-105  duration-300 ease-in-out ">Login</button>
                         <a href="#" className="bg-[#4F9CF9] px-5 py-3 flex flex-row gap-2 items-center rounded-md w-auto hover:scale-105  duration-300 ease-in-out">
                             <span>Try Whitepace for free</span>

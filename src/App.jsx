@@ -15,31 +15,77 @@ import avatar1 from "./assets/Avater.png"
 import avatar2 from "./assets/Avate2r.png"
 import avatar3 from "./assets/Avate3r.png"
 
+import gsap from "gsap"
+import ScrollTrigeger from 'gsap/src/ScrollTrigger'
+import { useGSAP } from '@gsap/react';
+
 
 function App() {
+
+    gsap.registerPlugin(useGSAP, ScrollTrigeger);
+
+    useGSAP(() => {
+        const tl = gsap.timeline()
+        tl.from('.hero-img',{
+            x: -2000,
+            delay: 0.5,
+            duration: 1
+        });
+        tl.from('.hero-element', {
+            scale: 0,
+            y: 2000,
+            duration: 1.2,
+            delay: 0.7,
+            stagger: 0.3,
+        });
+
+        gsap.from(".section-2", {
+            opacity: 0,
+            y: -500,
+            duration: 2,
+            scrollTrigger: {
+                trigger: ".section-2",
+                scroller: 'body',
+                start: "top -10%",
+                // scrub: 1,
+            }
+        })
+
+        gsap.from(".section-3", {
+            opacity: 0,
+            y: 700,
+            duration: 2,
+            scrollTrigger: {
+                trigger: ".section-3",
+                scroller: 'body',
+                start: "top 150%"
+            }
+        })
+    } )
+
   return (
     < >
       <Navbar />
 
-       <section className="bg-mainbg min-h-[80vh] py-3 text-white bg-contain bg-[url('./assets/Element.png')] bg-no-repeat  ">
+       <section className="bg-mainbg min-h-[80vh] py-3 text-white bg-contain bg-[url('./assets/Element.png')] bg-no-repeat relative w-full mt-[4rem] overflow-hidden ">
         <div className="flex lg:flex-row sm:flex-col small:flex-col items-center justify-center container mx-auto lg:gap-3 sm:gap-10 small:gap-14 my-5 p-3">
             <div className="flex flex-col justify-center lg:items-start sm:items-center small:items-center lg:gap-14 sm:gap-14 small:gap-14 relative">
-                <h1 className="text-[4rem] font-bold sm:text-center small:text-center lg:text-start">Get More Done with whitepace</h1>
-                <p className="text-lg sm:text-center small:text-center lg:text-start ">Project management software that enables your teams to collaborate, plan, analyze and
+                <h1 className="hero-element text-[4rem] font-bold sm:text-center small:text-center lg:text-start">Get More Done with whitepace</h1>
+                <p className="hero-element text-lg sm:text-center small:text-center lg:text-start ">Project management software that enables your teams to collaborate, plan, analyze and
                     manage everyday tasks</p>
-                <a href="#" className="bg-[#4F9CF9] px-7 py-3 flex flex-row gap-2 items-center rounded-md hover:scale-105  duration-300 ease-in-out ">
+                <a href="#" className=" bg-[#4F9CF9] px-7 py-3 flex flex-row gap-2 items-center rounded-md hover:scale-105  duration-300 ease-in-out ">
                     <span>Try Whitepace for free</span>
                     <i className="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
             <div>
-                <img src={heroImg} className="md:w-[60vw] md:h-[60vh]  lg:w-[60vw] lg:h-[77vh] sm:w-auto small:w-auto sm:h-[50vh] small:h-[50vh] " alt=""/>
+                <img src={heroImg} className="hero-img md:w-[60vw] md:h-[60vh]  lg:w-[60vw] lg:h-[77vh] sm:w-auto small:w-auto sm:h-[50vh] small:h-[50vh] " alt=""/>
             </div>
         </div>
       </section>
 
       <section className="flex flex-col gap-28 my-32 ">
-        <div className="mx-auto gap-5 flex sm:flex-col small:flex-col lg:flex-row items-center container justify-center ">
+        <div className="section-2 mx-auto gap-5 flex sm:flex-col small:flex-col lg:flex-row items-center container justify-center ">
             <div className=" flex flex-col justify-center sm:items-center small:items-center lg:items-start gap-16 p-7">
               <div className="relative" >
                   <h1 className="text-7xl font-bold sm:text-center small:text-center lg:text-start ">Project Management</h1>
@@ -59,7 +105,7 @@ function App() {
             </div>
         </div>
 
-        <div className="w-full mx-auto gap-5 flex container sm:flex-col-reverse small:flex-col-reverse lg:flex-row items-center justify-center ">
+        <div className="section-3 w-full mx-auto gap-5 flex container sm:flex-col-reverse small:flex-col-reverse lg:flex-row items-center justify-center ">
             <div className="lg:block small:flex small:items-center small:justify-center">
                 <img src={circleImg} className=" lg:w-[88vw] sm:w-[90%] small:w-[70%] " alt=""/>
             </div>
